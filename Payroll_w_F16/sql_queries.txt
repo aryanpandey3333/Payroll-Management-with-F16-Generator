@@ -1,0 +1,141 @@
+drop table verification, tax, salary, exemptions, deductions, form16_partb, employee;
+
+CREATE TABLE employee (
+  emp_id INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR(50) NOT NULL,
+  password VARCHAR(50) NOT NULL,
+  address VARCHAR(100) NOT NULL,
+  contact_no VARCHAR(20) NOT NULL,
+  pan VARCHAR(10) NOT NULL,
+  PRIMARY KEY (emp_id)
+);
+
+CREATE TABLE salary (
+  emp_id INT NOT NULL AUTO_INCREMENT,
+  basic_salary DECIMAL(10,2) NOT NULL,
+  allowances DECIMAL(10,2) NOT NULL,
+  perquisites DECIMAL(10,2) NOT NULL,
+  profits DECIMAL(10,2) NOT NULL,
+  income_house_property DECIMAL(10,2),
+  income_capital_gains DECIMAL(10,2),
+  income_other_sources DECIMAL(10,2),
+  total_income DECIMAL(10,2),
+  PRIMARY KEY (emp_id),
+  FOREIGN KEY (emp_id) REFERENCES employee(emp_id)
+);
+
+CREATE TABLE deductions (
+  emp_id INT NOT NULL AUTO_INCREMENT,
+  section VARCHAR(10) NOT NULL,
+  amount DECIMAL(10,2) NOT NULL,
+  PRIMARY KEY (emp_id, section),
+  FOREIGN KEY (emp_id) REFERENCES employee(emp_id)
+);
+
+CREATE TABLE exemptions (
+  emp_id INT NOT NULL AUTO_INCREMENT,
+  type VARCHAR(10) NOT NULL,
+  amount DECIMAL(10,2) NOT NULL,
+  PRIMARY KEY (emp_id, type),
+  FOREIGN KEY (emp_id) REFERENCES employee(emp_id)
+);
+
+CREATE TABLE tax (
+  emp_id INT NOT NULL AUTO_INCREMENT,
+  tds_salary DECIMAL(10,2) NOT NULL,
+  tds_other_income DECIMAL(10,2),
+  advance_tax DECIMAL(10,2),
+  self_assessment_tax DECIMAL(10,2),
+  PRIMARY KEY (emp_id),
+  FOREIGN KEY (emp_id) REFERENCES employee(emp_id)
+);
+
+CREATE TABLE verification (
+  emp_id INT NOT NULL AUTO_INCREMENT,
+  declaration TEXT NOT NULL,
+  signature VARCHAR(100) NOT NULL,
+  date DATE NOT NULL,
+  PRIMARY KEY (emp_id),
+  FOREIGN KEY (emp_id) REFERENCES employee(emp_id)
+);
+
+CREATE TABLE form16_partb (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  employee_id int(11) NOT NULL,
+  assessment_year int(4) NOT NULL,
+  gross_salary decimal(10,2) NOT NULL,
+  basic_salary decimal(10,2) NOT NULL,
+  dearness_allowance decimal(10,2) NOT NULL,
+  house_rent_allowance decimal(10,2) NOT NULL,
+  other_allowances decimal(10,2) NOT NULL,
+  exempted_allowances decimal(10,2) NOT NULL,
+  perquisites decimal(10,2) NOT NULL,
+  profits_in_lieu_of_salary decimal(10,2) NOT NULL,
+  deductions_upto_16 decimal(10,2) NOT NULL,
+  deductions_upto_80c decimal(10,2) NOT NULL,
+  deductions_upto_80d decimal(10,2) NOT NULL,
+  deductions_upto_other decimal(10,2) NOT NULL,
+  total_deductions decimal(10,2) NOT NULL,
+  chargeable_income decimal(10,2) NOT NULL,
+  other_income decimal(10,2) NOT NULL,
+  gross_total_income decimal(10,2) NOT NULL,
+  total_taxable_income decimal(10,2) NOT NULL,
+  income_tax decimal(10,2) NOT NULL,
+  education_cess decimal(10,2) NOT NULL,
+  total_tax_payable decimal(10,2) NOT NULL,
+  tds_deducted decimal(10,2) NOT NULL,
+  tax_payable_or_refundable decimal(10,2) NOT NULL,
+  investment_proof_upto_80c decimal(10,2) NOT NULL,
+  investment_proof_upto_80d decimal(10,2) NOT NULL,
+  investment_proof_others decimal(10,2) NOT NULL,
+  PRIMARY KEY (id),
+  KEY employee_id (employee_id),
+  CONSTRAINT form16_partb_ibfk_1 FOREIGN KEY (employee_id) REFERENCES employee (emp_id) ON DELETE CASCADE
+);
+
+
+-- employee table
+INSERT INTO employee (emp_id, name, password, address, contact_no, pan) VALUES
+(1,'John Smith', 'password1', '123 Main St, Anytown USA', '+91 9999999999', 'ABCD1234'),
+(2,'Jane Doe', 'password2', '456 Oak Ave, Somewhere Else', '+91 8888888888', 'EFGH5678'),
+(3,'Bob Johnson', 'password3', '789 Maple Rd, Nowhereville', '+91 7777777777', 'IJKL9012');
+
+-- salary table
+INSERT INTO salary (emp_id, basic_salary, allowances, perquisites, profits, income_house_property, income_capital_gains, income_other_sources, total_income) VALUES
+(1, 5000000.00, 1000000.00, 500000.00, 1000000.00, 0.00, 0.00, 0.00, 7500000.00),
+(2, 6000000.00, 1200000.00, 600000.00, 1200000.00, 0.00, 0.00, 0.00, 9000000.00),
+(3, 4000000.00, 800000.00, 400000.00, 800000.00, 0.00, 0.00, 0.00, 6000000.00);
+
+-- deductions table
+INSERT INTO deductions (emp_id, section, amount) VALUES
+(1, '80D', 250000.00),
+(2, '80C', 600000.00),
+(3, '80D', 300000.00);
+
+-- exemptions table
+INSERT INTO exemptions (emp_id, type, amount) VALUES
+(1, 'HRA', 1000000.00),
+(2, 'LTA', 800000.00),
+(3, 'LTA', 600000.00);
+
+-- tax table
+INSERT INTO tax (emp_id, tds_salary, tds_other_income, advance_tax, self_assessment_tax) VALUES
+(1, 1000000.00, 0.00, 500000.00, 0.00),
+(2, 1200000.00, 0.00, 600000.00, 0.00),
+(3, 800000.00, 0.00, 400000.00, 0.00);
+
+-- verification table
+INSERT INTO verification (emp_id, declaration, signature, date) VALUES
+(1, 'I declare that the information provided is accurate to the best of my knowledge.', 'John Smith', '2022-03-10'),
+(2, 'I declare that the information provided is accurate to the best of my knowledge.', 'Jane Doe', '2022-03-11'),
+(3, 'I declare that the information provided is accurate to the best of my knowledge.', 'Bob Johnson', '2022-03-12');
+
+-- form19_paartb table
+INSERT INTO form16_partb (employee_id, assessment_year, gross_salary, basic_salary, dearness_allowance, house_rent_allowance, other_allowances, exempted_allowances, perquisites, profits_in_lieu_of_salary, deductions_upto_16, deductions_upto_80c, deductions_upto_80d, deductions_upto_other, total_deductions, chargeable_income, other_income, gross_total_income, total_taxable_income, income_tax, education_cess, total_tax_payable, tds_deducted, tax_payable_or_refundable, investment_proof_upto_80c, investment_proof_upto_80d, investment_proof_others)
+VALUES (1, 2022, 500000.00, 250000.00, 150000.00, 0.00, 50000.00, 0.00, 0.00, 0.00, 0.00, 50000.00, 0.00, 0.00, 50000.00, 200000.00, 0.00, 200000.00, 200000.00, 10000.00, 2000.00, 121000.00, 10000.00, 111000.00, 50000.00, 20000.00, 10000.00);
+
+INSERT INTO form16_partb (employee_id, assessment_year, gross_salary, basic_salary, dearness_allowance, house_rent_allowance, other_allowances, exempted_allowances, perquisites, profits_in_lieu_of_salary, deductions_upto_16, deductions_upto_80c, deductions_upto_80d, deductions_upto_other, total_deductions, chargeable_income, other_income, gross_total_income, total_taxable_income, income_tax, education_cess, total_tax_payable, tds_deducted, tax_payable_or_refundable, investment_proof_upto_80c, investment_proof_upto_80d, investment_proof_others)
+VALUES (2, 2022, 750000.00, 500000.00, 100000.00, 50000.00, 100000.00, 0.00, 0.00, 0.00, 0.00, 50000.00, 0.00, 0.00, 50000.00, 400000.00, 0.00, 400000.00, 400000.00, 40000.00, 8000.00, 328000.00, 40000.00, 288000.00, 100000.00, 50000.00, 20000.00);
+
+INSERT INTO form16_partb (employee_id, assessment_year, gross_salary, basic_salary, dearness_allowance, house_rent_allowance, other_allowances, exempted_allowances, perquisites, profits_in_lieu_of_salary, deductions_upto_16, deductions_upto_80c, deductions_upto_80d, deductions_upto_other, total_deductions, chargeable_income, other_income, gross_total_income, total_taxable_income, income_tax, education_cess, total_tax_payable, tds_deducted, tax_payable_or_refundable, investment_proof_upto_80c, investment_proof_upto_80d, investment_proof_others)
+VALUES (3, 2023, 800000.00, 480000.00, 220000.00, 110000.00, 55000.00, 27500.00, 110000.00, 55000.00, 11000.00, 55000.00, 27500.00, 11000.00, 148500.00, 651500.00, 0.00, 651500.00, 651500.00, 93000.00, 18600.00, 111600.00, 93000.00, 18600.00, 55000.00, 27500.00, 11000.00);
