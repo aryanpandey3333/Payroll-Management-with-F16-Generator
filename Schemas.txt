@@ -1,0 +1,58 @@
+CREATE TABLE employee (
+  emp_id INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR(50) NOT NULL,
+  password VARCHAR(50) NOT NULL,
+  address VARCHAR(100) NOT NULL,
+  contact_no VARCHAR(20) NOT NULL,
+  pan VARCHAR(10) NOT NULL,
+  PRIMARY KEY (emp_id)
+);
+
+CREATE TABLE salary (
+  emp_id INT NOT NULL,
+  basic_salary DECIMAL(10,2) NOT NULL,
+  allowances DECIMAL(10,2) NOT NULL,
+  perquisites DECIMAL(10,2) NOT NULL,
+  profits DECIMAL(10,2) NOT NULL,
+  income_house_property DECIMAL(10,2),
+  income_capital_gains DECIMAL(10,2),
+  income_other_sources DECIMAL(10,2),
+  total_income DECIMAL(10,2),
+  PRIMARY KEY (emp_id),
+  FOREIGN KEY (emp_id) REFERENCES employee(emp_id)
+);
+
+CREATE TABLE deductions (
+  emp_id INT NOT NULL,
+  section VARCHAR(10) NOT NULL,
+  amount DECIMAL(10,2) NOT NULL,
+  PRIMARY KEY (emp_id, section),
+  FOREIGN KEY (emp_id) REFERENCES employee(emp_id)
+);
+
+CREATE TABLE exemptions (
+  emp_id INT NOT NULL,
+  type VARCHAR(10) NOT NULL,
+  amount DECIMAL(10,2) NOT NULL,
+  PRIMARY KEY (emp_id, type),
+  FOREIGN KEY (emp_id) REFERENCES employee(emp_id)
+);
+
+CREATE TABLE tax (
+  emp_id INT NOT NULL,
+  tds_salary DECIMAL(10,2) NOT NULL,
+  tds_other_income DECIMAL(10,2),
+  advance_tax DECIMAL(10,2),
+  self_assessment_tax DECIMAL(10,2),
+  PRIMARY KEY (emp_id),
+  FOREIGN KEY (emp_id) REFERENCES employee(emp_id)
+);
+
+CREATE TABLE verification (
+  emp_id INT NOT NULL,
+  declaration TEXT NOT NULL,
+  signature VARCHAR(100) NOT NULL,
+  date DATE NOT NULL,
+  PRIMARY KEY (emp_id),
+  FOREIGN KEY (emp_id) REFERENCES employee(emp_id)
+);

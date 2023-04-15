@@ -1,0 +1,21 @@
+INSERT INTO form16_partb (employee_id, assessment_year, gross_salary, basic_salary, dearness_allowance, house_rent_allowance, other_allowances, exempted_allowances, perquisites, profits_in_lieu_of_salary, deductions_upto_16, deductions_upto_80c, deductions_upto_80d, deductions_upto_other, total_deductions, chargeable_income, other_income, gross_total_income, total_taxable_income, income_tax, education_cess, total_tax_payable, tds_deducted, tax_payable_or_refundable, investment_proof_upto_80c, investment_proof_upto_80d, investment_proof_others)
+VALUES (3, 2022, 600000, 500000, 40000, 30000, 20000, 10000, 50000, 0, 50000, 50000, 25000, 0, 175000, 425000, 0, 425000, 425000, 0, 0, 0, 0, 0, 50000, 25000, 25000);
+
+==============================================================================================================================================================================================
+
+INSERT INTO form16_partb (employee_id, assessment_year, gross_salary, basic_salary, dearness_allowance, house_rent_allowance, other_allowances, exempted_allowances, perquisites, profits_in_lieu_of_salary, deductions_upto_16, deductions_upto_80c, deductions_upto_80d, deductions_upto_other, total_deductions, chargeable_income, other_income, gross_total_income, total_taxable_income, income_tax, education_cess, total_tax_payable, tds_deducted, tax_payable_or_refundable, investment_proof_upto_80c, investment_proof_upto_80d, investment_proof_others)
+VALUES (1, 2022, 600000.00, 400000.00, 100000.00, 60000.00, 50000.00, 20000.00, 10000.00, 0.00, 15000.00, 100000.00, 25000.00, 10000.00, 155000.00, 445000.00, 0.00, 445000.00, 445000.00, 18700.00, 374.00, 19074.00, 18000.00, 1074.00, 100000.00, 25000.00, 5000.00);
+
+==============================================================================================================================================================================================
+
+INSERT INTO form16_partb (employee_id, assessment_year, gross_salary, basic_salary, dearness_allowance, house_rent_allowance, other_allowances, exempted_allowances, perquisites, profits_in_lieu_of_salary, deductions_upto_16, deductions_upto_80c, deductions_upto_80d, deductions_upto_other, total_deductions, chargeable_income, other_income, gross_total_income, total_taxable_income, income_tax, education_cess, total_tax_payable, tds_deducted, tax_payable_or_refundable, investment_proof_upto_80c, investment_proof_upto_80d, investment_proof_others)
+VALUES (2, 2022, 800000.00, 600000.00, 120000.00, 80000.00, 60000.00, 30000.00, 15000.00, 0.00, 20000.00, 200000.00, 40000.00, 15000.00, 295000.00, 505000.00, 0.00, 505000.00, 505000.00, 55050.00, 1101.00, 56151.00, 60000.00, -3849.00, 200000.00, 40000.00, 10000.00);
+
+==============================================================================================================================================================================================
+
+INSERT INTO form16_partb (employee_id, assessment_year, gross_salary, basic_salary, dearness_allowance, house_rent_allowance, other_allowances, exempted_allowances, perquisites, profits_in_lieu_of_salary, deductions_upto_16, deductions_upto_80c, deductions_upto_80d, deductions_upto_other, total_deductions, chargeable_income, other_income, gross_total_income, total_taxable_income, income_tax, education_cess, total_tax_payable, tds_deducted, tax_payable_or_refundable, investment_proof_upto_80c, investment_proof_upto_80d, investment_proof_others) 
+VALUES 
+(1, 2022, 750000.00, 500000.00, 125000.00, 50000.00, 25000.00, 20000.00, 10000.00, 0.00, 20000.00, 100000.00, 5000.00, 0.00, 175000.00, 575000.00, 0.00, 575000.00, 575000.00, 0.00, 0.00, 0.00, 0.00, -575000.00, 0.00, 0.00),
+(2, 2022, 1200000.00, 800000.00, 200000.00, 80000.00, 40000.00, 32000.00, 16000.00, 0.00, 32000.00, 160000.00, 8000.00, 0.00, 288000.00, 712000.00, 0.00, 712000.00, 712000.00, 96000.00, 3840.00, 808640.00, 808640.00, 0.00, 0.00, 0.00);
+
+==============================================================================================================================================================================================
